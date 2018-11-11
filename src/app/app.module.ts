@@ -8,6 +8,9 @@ import { AppareilComponent } from './appareil/appareil.component';
 
 import { FormsModule } from '@angular/forms';
 
+// Importation of service AppareilService
+import { AppareilService } from './services/appareil.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +21,10 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  // Angular doc: https://angular.io/guide/providers
+  providers: [
+    AppareilService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

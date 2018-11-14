@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 // Importation of service AppareilService
 import { AppareilService } from './services/appareil.service';
+import { AuthService } from './services/auth.service'
 import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
   ],
   // Angular doc: https://angular.io/guide/providers
   providers: [
-    AppareilService
+    AppareilService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

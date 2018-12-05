@@ -47,6 +47,7 @@ export class AppareilService {
   }
 
   emitAppareilSubject() {
+    // Doc: https://github.com/ReactiveX/rxjs/blob/master/doc/subject.md
     this.appareilsubject.next(this.appareils.slice());
   }
 

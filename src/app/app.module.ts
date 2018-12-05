@@ -8,10 +8,12 @@ import { AppareilComponent } from './appareil/appareil.component';
 
 import { FormsModule } from '@angular/forms';
 
-// Importation of service AppareilService
+// Importation of services
 import { AppareilService } from './services/appareil.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { UserService } from './services/user.service';
+
 import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
 
@@ -19,12 +21,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 const appRoutes: Routes = [
   {path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent},
   {path: 'appareils/:id', canActivate: [AuthGuard], component: SingleAppareilComponent},
   {path: 'edit', canActivate: [AuthGuard], component: EditAppareilComponent},
   {path: 'auth', component: AuthComponent},
+  {path: 'users', component: UserListComponent},
   {path: '', component: AppareilViewComponent},
   {path: 'not-found', component: FourOhFourComponent},
   // The wildcard ** is the default URL and must be consequently introduced in last position
@@ -40,7 +44,8 @@ const appRoutes: Routes = [
     AppareilViewComponent,
     SingleAppareilComponent,
     FourOhFourComponent,
-    EditAppareilComponent
+    EditAppareilComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,8 @@ const appRoutes: Routes = [
   providers: [
     AppareilService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

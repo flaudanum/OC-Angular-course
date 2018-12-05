@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AppareilService } from '../services/appareil.service'
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AppareilService } from '../services/appareil.service';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-appareil-view',
@@ -8,7 +9,10 @@ import { AppareilService } from '../services/appareil.service'
   styleUrls: ['./appareil-view.component.scss']
 })
 
-export class AppareilViewComponent implements OnInit {
+export class AppareilViewComponent implements OnInit, OnDestroy {
+
+  appareils: any[];
+  appareilSubscription: Subscription;
 
   isAuth = false;
 
@@ -23,18 +27,22 @@ export class AppareilViewComponent implements OnInit {
     }
   );
 
-  appareils: any[];
-
-  constructor(private appareilService: AppareilService) {
-    setTimeout(
+  constructor(private appareilService: AppareilService, private authService: AuthService) {
+/*     setTimeout(
       () => {
         this.isAuth = true;
       }, 4000
-    );
+    ); */
+    this.isAuth = this.authService.isAuth;
   }
 
   ngOnInit() {
-    this.appareils = this.appareilService.appareils;
+    this.appareilSubscription = this.appareilService.appareilsubject.subscribe(
+      (appareils: any[]) => {
+        this.appareils = appareils;
+      }
+    );
+    this.appareilService.emitAppareilSubject();
   }
 
   onAllumer() {
@@ -47,7 +55,10 @@ export class AppareilViewComponent implements OnInit {
     else {
       return null;
     }
+  }
 
+  ngOnDestroy() {
+    this.appareilSubscription.unsubscribe();
   }
 
 }

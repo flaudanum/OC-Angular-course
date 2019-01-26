@@ -12,6 +12,7 @@ export class UserService {
 
     emitUsers() {
         // doc: https://github.com/ReactiveX/rxjs/blob/master/doc/subject.md
+        // slice() w/o arguments selects all the elements
         this.userSubjsect.next(this.users.slice());
     }
 
